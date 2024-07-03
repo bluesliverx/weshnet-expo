@@ -7,6 +7,11 @@ public class WeshnetExpoModule: Module {
     public func definition() -> ModuleDefinition {
         Name("WeshnetExpo")
 
+        // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
+        Function("test") {
+          return "native ios expo-weshnet"
+        }
+
         AsyncFunction("init") { (promise: Promise) in
             do {
                 if self.service == nil {

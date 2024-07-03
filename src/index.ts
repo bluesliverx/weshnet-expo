@@ -16,3 +16,7 @@ export async function init(): Promise<ProtocolServiceClient> {
     )
     .catch((err: any) => console.error('init error', err))
 }
+
+export function test(): string {
+  return WeshnetExpoModule.test();
+}

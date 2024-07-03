@@ -16,6 +16,9 @@ class WeshnetExpoModule : Module() {
     override fun definition() = ModuleDefinition {
         Name("WeshnetExpo")
 
+        Function("test") { ->
+            "native android expo-weshnet"
+        }
         AsyncFunction("init") { promise: Promise ->
             try {
                 if (service == null) {
