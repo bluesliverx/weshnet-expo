@@ -1,6 +1,6 @@
 
 // Redefine WeshnetError with more context.
-open class WeshnetError: Exception {
+open class WeshnetError: Error {
     public enum ErrorCase {
         case notStarted
         case coreError(NSError)
@@ -15,10 +15,10 @@ open class WeshnetError: Exception {
         case .coreError(let error):
             self.errorDescription = error.localizedDescription
         }
-        super.init(file: file, line: line, function: function)
+        //super.init(file: file, line: line, function: function)
     }
 
-    open override var reason: String {
+    open var reason: String {
         return self.errorDescription
     }
 }
