@@ -1,13 +1,18 @@
-import { EventEmitter } from 'expo-modules-core'
+import { EventEmitter } from 'expo-modules-core';
 
-const emitter = new EventEmitter({} as any)
+const emitter = new EventEmitter({} as any);
 
 export default {
-  PI: Math.PI,
   async setValueAsync(value: string): Promise<void> {
-    emitter.emit('onChange', { value })
+    emitter.emit('onChange', { value });
   },
-  hello() {
-    return 'Hello world! 👋'
+  async invokeMethod(method: string, ...args) : Promise<void> {
+    throw new Error('Method not implemented in web code, check native module configuration');
+  },
+  test() {
+    return 'non-native weshnet-expo';
+  },
+  hello(name: string) {
+    throw new Error('Method not implemented in web code, check native module configuration');
   },
 }

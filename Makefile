@@ -77,6 +77,7 @@ api/protocoltypes.proto: buf.yaml
 	mkdir -p $(dir $@)
 	buf export buf.build/berty/weshnet:$(PROTOCOLTYPES_COMMIT_HASH) --output $(dir $@)
 build/api/protocoltypes.pb.js: api/protocoltypes.proto
+	mkdir -p build/api
 	$(pbjs) -t json-module -w es6 -o $@ $<
 build/api/protocoltypes.pb.d.ts: api/protocoltypes.proto
 	$(pbjs) -t static-module $< | $(pbts) -o $@ -

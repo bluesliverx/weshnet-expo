@@ -19,6 +19,11 @@ class WeshnetExpoModule : Module() {
         Function("test") { ->
             "native android expo-weshnet"
         }
+
+        Function("hello") { name: String ->
+            Core.hello(name)
+        }
+
         AsyncFunction("init") { promise: Promise ->
             try {
                 if (service == null) {

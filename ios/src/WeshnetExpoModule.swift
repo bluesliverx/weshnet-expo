@@ -9,7 +9,11 @@ public class WeshnetExpoModule: Module {
 
         // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
         Function("test") {
-          return "native ios expo-weshnet"
+            return "native ios expo-weshnet"
+        }
+
+        Function("hello") { (name: String) in
+            return WeshnetCoreHello(name)
         }
 
         AsyncFunction("init") { (promise: Promise) in
