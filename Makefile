@@ -70,33 +70,33 @@ api.clean: _api.clean.protocol _api.clean.rpcmanager
 
 # - API - protocoltypes
 
-_api.generate.protocol: src/api/protocoltypes.pb.js \
-						src/api/protocoltypes.pb.d.ts \
-						src/weshnet.types.gen.ts
+_api.generate.protocol: build/api/protocoltypes.pb.js \
+						build/api/protocoltypes.pb.d.ts \
+						build/weshnet.types.gen.ts
 _api.clean.protocol:
-	rm -f src/vendor src/api/protocoltypes.pb.js src/api/protocoltypes.pb.d.ts src/weshnet.types.gen.ts
+	rm -f src/vendor build/api/protocoltypes.pb.js build/api/protocoltypes.pb.d.ts build/weshnet.types.gen.ts
 
 api/vendor/protocoltypes.proto:
 	mkdir -p $(dir $@)
 	buf export buf.build/berty-technologies/weshnet:$(PROTOCOLTYPES_COMMIT_HASH) --output $(dir $@)
-src/api/protocoltypes.pb.js: api/vendor/protocoltypes.proto
+build/api/protocoltypes.pb.js: api/vendor/protocoltypes.proto
 	$(pbjs) -t json-module -w es6 -o $@ $<
-src/api/protocoltypes.pb.d.ts: api/vendor/protocoltypes.proto
+build/api/protocoltypes.pb.d.ts: api/vendor/protocoltypes.proto
 	$(pbjs) -t static-module $< | $(pbts) -o $@ -
-src/weshnet.types.gen.ts: api/vendor/protocoltypes.proto gen-clients.js
+build/weshnet.types.gen.ts: api/vendor/protocoltypes.proto gen-clients.js
 	node gen-clients.js > $@
 
 # - API - rpcmanager
 
-_api.generate.rpcmanager: api/rpcmanager.proto src/api/rpcmanager.pb.js src/api/rpcmanager.pb.d.ts
+_api.generate.rpcmanager: api/rpcmanager.proto build/api/rpcmanager.pb.js build/api/rpcmanager.pb.d.ts
 _api.clean.rpcmanager:
-	rm -f api/rpcmanager.proto src/api/rpcmanager.pb.js src/api/rpcmanager.pb.d.ts
+	rm -f api/rpcmanager.proto build/api/rpcmanager.pb.js build/api/rpcmanager.pb.d.ts
 
 api/rpcmanager.proto: go.sum go.mod
 	go run github.com/gfanton/grpcutil/rpcmanager/protofile > $@
-src/api/rpcmanager.pb.js: api/rpcmanager.proto
+build/api/rpcmanager.pb.js: api/rpcmanager.proto
 	$(pbjs) -t json-module -w commonjs -o $@ $<
-src/api/rpcmanager.pb.d.ts: api/rpcmanager.proto
+build/api/rpcmanager.pb.d.ts: api/rpcmanager.proto
 	$(pbjs) -t static-module $< | $(pbts) -o $@ -
 
 .PHONY: api.generate _api.generate.rpcmanager _api.generate.protocol

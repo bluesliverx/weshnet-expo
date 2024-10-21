@@ -10,7 +10,6 @@ import WeshnetExpoModule from './WeshnetExpoModule'
 
 export async function init(): Promise<ProtocolServiceClient> {
   return WeshnetExpoModule.init()
-    .then(() => WeshnetExpoModule.init())
     .then(() =>
       createServiceClient(api.protocol.ProtocolService, rpcBridgeImpl),
     )
